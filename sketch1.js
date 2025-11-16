@@ -165,7 +165,7 @@ function displayInfo(atom){
 
 // menu
 function displayMenu(){
-  fill(0,100); noStroke(); rect(20,20,520,180,15);
+  fill(0,100); noStroke(); rect(20,20,400,180,15);
   fill(255,204,0); textSize(18); textAlign(LEFT,TOP);
   let instr=[
     "📜 Instructions :",
