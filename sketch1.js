@@ -1,297 +1,192 @@
+// globaux
+let atoms = []; // liste atomes
+let path;       // chemin
+let vehicles = []; // vehicules
 
-
-let atoms = []; // Liste des atomes
-let path;
-let vehicles = [];
-
+// setup
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
-  // Créer plusieurs atomes
-  atoms.push(new Atome("H", 1, 0, 1, random(width), random(height))); // Hydrogène
-  atoms.push(new Atome("He", 2, 2, 2, random(width), random(height))); // Hélium
-  atoms.push(new Atome("H", 1, 0, 1, random(width), random(height))); // Hydrogène
-  atoms.push(new Atome("He", 2, 2, 2, random(width), random(height))); // Hélium
-  // Associer les données du fichier atomData.js à chaque Atome
-  for (let atom of atoms) {
-    let data = atomData.find(a => a.symbole === atom.nom);
-    if (data) {
-      atom.dataFromFile = data;
-    }
+  // creer qques atomes
+  atoms.push(new Atome("H", 1,0,1, random(width), random(height))); // hydrogene
+  atoms.push(new Atome("He",2,2,2, random(width), random(height))); // helium
+  atoms.push(new Atome("H", 1,0,1, random(width), random(height))); // hydrogene
+  atoms.push(new Atome("Zn",30,35,30, random(width), random(height))); // zinc
+
+  // associer data atomData.js
+  for (let atom of atoms){
+    let data = atomData.find(a=>a.symbole===atom.nom);
+    if(data) atom.dataFromFile = data;
   }
 
-
+  // chemin
   newPath();
 
-
-  newVehicle(200, 200, atomData.find(a => a.symbole === "O")); // Oxygène
-  newVehicle(400, 200, atomData.find(a => a.symbole === "C")); // Carbone
-  newVehicle(600, 200); // atome aléatoire
-    newVehicle(200, 200, atomData.find(a => a.symbole === "H")); // Oxygène
-  newVehicle(400, 200, atomData.find(a => a.symbole === "He")); // Carbone
-    newVehicle(200, 200, atomData.find(a => a.symbole === "H")); // Oxygène
-  newVehicle(400, 200, atomData.find(a => a.symbole === "He")); 
-    newVehicle(200, 200, atomData.find(a => a.symbole === "Zn")); // Oxygène
-  newVehicle(400, 200, atomData.find(a => a.symbole === "Cr")); 
+  // vehicules
+  newVehicle(200,200, atomData.find(a=>a.symbole==="O")); // oxy
+  newVehicle(400,200, atomData.find(a=>a.symbole==="C")); // carb
+  newVehicle(600,200); // aleatoire
+  newVehicle(200,200, atomData.find(a=>a.symbole==="H"));
+  newVehicle(400,200, atomData.find(a=>a.symbole==="He"));
+  newVehicle(200,200, atomData.find(a=>a.symbole==="H"));
+  newVehicle(400,200, atomData.find(a=>a.symbole==="He"));
+  newVehicle(200,200, atomData.find(a=>a.symbole==="Zn"));
+  newVehicle(400,200, atomData.find(a=>a.symbole==="Cr"));
 }
 
-
-function draw() {
+// draw boucle
+function draw(){
   background(0);
 
-
-  // --- Affichage du titre ---
-  fill(255, 204, 0); // couleur jaune/or comme le Soleil
-  stroke(255, 150, 0);
+  // titre
+  fill(255,204,0);
+  stroke(255,150,0);
   strokeWeight(2);
   textSize(36);
-  textAlign(CENTER, TOP);
-  text("🔥 Ce qui se passe dans le Soleil 🔥", width / 2, 10);
+  textAlign(CENTER,TOP);
+  text("🔥 Ce qui se passe dans le Soleil 🔥", width/2, 10);
 
   let selectedAtom = null;
-  // Parcourir tous les atomes
-  for (let atom of atoms) {
-    atom.applyBehaviors();
-    atom.update();
-    atom.afficher();
 
-    if (atom.selected) {
-      selectedAtom = atom; // garder la référence pour le panneau info
-    }
+  // atoms loop
+  for(let atom of atoms){
+    atom.applyBehaviors(); // flocking
+    atom.update(); // maj pos
+    atom.afficher(); // draw
+
+    if(atom.selected) selectedAtom = atom; // selection
   }
 
-  // Afficher les infos à droite
+  // info panel
   displayInfo(selectedAtom);
 
-
+  // menu
   displayMenu();
 
-
-
+  // win check
   checkWinCondition();
 
-
-
+  // path display
   path.display();
 
-  for (let v of vehicles) {
-    // On applique les comportements pour suivre le chemin
-    v.applyBehaviors(vehicles, path);
-    // on a regroupé update, draw etc. dans une méthode run (update, borders, display, etc.)
-    v.run();
+  // vehicules loop
+  for(let v of vehicles){
+    v.applyBehaviors(vehicles, path); // suivre path
+    v.run(); // maj+draw
   }
 }
 
-function newPath() {
+// path simple
+function newPath(){
   path = new Path();
-  let offset = 50; // marge par rapport au bas de l'écran
-  let y = height - offset; // position verticale du chemin (en bas)
-
-  // Chemin horizontal qui dépasse à gauche et à droite
-  path.addPoint(-200, y);       // point à gauche hors de l'écran
-  path.addPoint(width + 200, y); // point à droite hors de l'écran
+  let offset = 50;
+  let y = height - offset;
+  path.addPoint(-200,y);
+  path.addPoint(width+200,y);
 }
 
-
-// Redimensionner le canvas si la fenêtre change
-function windowResized() {
+// resize canvas
+function windowResized(){
   resizeCanvas(windowWidth, windowHeight);
 }
 
-
-function keyPressed() {
-  if (key === 'd') {
-    // Activer/désactiver le debug global
+// key press
+function keyPressed(){
+  if(key==='d'){
+    // debug toggle
     Atome.debug = !Atome.debug;
     Vehicle.debug = !Vehicle.debug;
-    Path.debug = !Path.debug;  // toggle Path debug mode
-
-
+    Path.debug = !Path.debug;
   }
-
-  else if (key === 'f') {
-    // Fusion de deux atomes sélectionnés
-    let selectedAtoms = atoms.filter(a => a.selected);
-    if (selectedAtoms.length === 2) {
-      let a1 = selectedAtoms[0];
-      let a2 = selectedAtoms[1];
-
+  else if(key==='f'){
+    // fusion
+    let sel = atoms.filter(a=>a.selected);
+    if(sel.length==2){
+      let a1 = sel[0];
+      let a2 = sel[1];
       let totalProtons = a1.nbProtons + a2.nbProtons;
-
-      // Chercher dans atomData l'élément avec ce nombre de protons
-      let fusionElement = atomData.find(el => el.protons === totalProtons);
-
-      if (fusionElement) {
-        // Créer le nouvel atome
-        let newX = (a1.pos.x + a2.pos.x) / 2;
-        let newY = (a1.pos.y + a2.pos.y) / 2;
-
-        let newAtom = new Atome(
-          fusionElement.symbole,
-          fusionElement.protons,
-          Math.round((a1.nbNeutrons + a2.nbNeutrons)), // neutrons sum approximatif
-          fusionElement.protons, // pour les éléments neutres, électrons = protons
-          newX,
-          newY
-        );
-
-        newAtom.dataFromFile = fusionElement;
-
-        // Supprimer les anciens atomes
-        atoms = atoms.filter(a => a !== a1 && a !== a2);
-
-        // Ajouter le nouvel atome
+      let fusion = atomData.find(e=>e.protons==totalProtons);
+      if(fusion){
+        let newX = (a1.pos.x + a2.pos.x)/2;
+        let newY = (a1.pos.y + a2.pos.y)/2;
+        let newAtom = new Atome(fusion.symbole, fusion.protons, Math.round(a1.nbNeutrons+a2.nbNeutrons), fusion.protons, newX, newY);
+        newAtom.dataFromFile = fusion;
+        atoms = atoms.filter(a=>a!==a1 && a!==a2);
         atoms.push(newAtom);
-      } else {
-        console.log("Pas d'élément connu pour cette fusion (protons =", totalProtons, ")");
-      }
+      }else console.log("pas d'elem connu pour fusion", totalProtons);
     }
   }
-
-
-
 }
-function newVehicle(x, y, atom = null) {
-  let maxspeed = random(2, 4);
+
+// new vehicle
+function newVehicle(x,y,atom=null){
+  let maxspeed = random(2,4);
   let maxforce = 0.3;
-
-  // Si aucun atome n'est précisé, on choisit un atome aléatoire
-  if (!atom) {
-    atom = random(atomData);
-  }
-
-  let v = new Vehicle(x, y, maxspeed, maxforce, atom);
+  if(!atom) atom=random(atomData);
+  let v = new Vehicle(x,y,maxspeed,maxforce,atom);
   vehicles.push(v);
   return v;
 }
 
-
-
-
-function mousePressed() {
-  for (let atom of atoms) {
-    // Rayon externe pour la sélection
-    let r = 60 + 40 * (atom.couches.length - 1);
-    let d = dist(mouseX, mouseY, atom.pos.x, atom.pos.y);
-    if (d < r) {
-      atom.selected = !atom.selected;
-    }
+// mouse click
+function mousePressed(){
+  // atom select
+  for(let atom of atoms){
+    let r = 60 + 40*(atom.couches.length-1);
+    if(dist(mouseX,mouseY,atom.pos.x,atom.pos.y)<r) atom.selected=!atom.selected;
   }
-  // 2️⃣ Vérifier les véhicules
-  for (let v of vehicles) {
-    let r = v.r; // rayon du véhicule
-    let d = dist(mouseX, mouseY, v.position.x, v.position.y);
-    if (d < r) {
-      // Si le véhicule a un atome associé
-      if (v.atom) {
-        let data = v.atom;
-
-        // Créer un nouvel atome du même type
-        let newAtom = new Atome(
-          data.symbole,
-          data.protons,
-          data.neutrons,    // nombre correct de neutrons
-          data.electrons,
-          mouseX + random(-20, 20),
-          mouseY + random(-20, 20)
-        );
-
-        // Copier les infos de atomData
-        newAtom.dataFromFile = data;
-
-        atoms.push(newAtom);
-      }
+  // vehicule click
+  for(let v of vehicles){
+    let r=v.r;
+    if(dist(mouseX,mouseY,v.position.x,v.position.y)<r && v.atom){
+      let d=v.atom;
+      let newAtom = new Atome(d.symbole,d.protons,d.neutrons,d.electrons, mouseX+random(-20,20), mouseY+random(-20,20));
+      newAtom.dataFromFile=d;
+      atoms.push(newAtom);
     }
   }
 }
 
-
-
-function displayInfo(atom) {
-  if (!atom || !atom.dataFromFile) return;
-
-  // Panneau à droite
-  let panelX = width - 220;
-  let panelY = 50;
-  let panelW = 200;
-  let panelH = 180;
-
-  fill(30, 200); // fond semi-transparent
-  stroke(255, 100);
-  strokeWeight(1);
-  rect(panelX, panelY, panelW, panelH, 10);
-
-  fill(255);
-  noStroke();
-  textSize(16);
-  textAlign(LEFT, TOP);
-
-  let infoY = panelY + 10;
-  let lineHeight = 24;
-  // Afficher les infos depuis le fichier atomData.js
-  text(`Symbole: ${atom.dataFromFile.symbole}`, panelX + 10, infoY);
-  infoY += lineHeight;
-  text(`Nom complet: ${atom.dataFromFile.nomComplet}`, panelX + 10, infoY);
-  infoY += lineHeight;
-  text(`Protons: ${atom.dataFromFile.protons}`, panelX + 10, infoY);
-  infoY += lineHeight;
-  // Pour neutrons et électrons, tu peux continuer à utiliser les valeurs de l'objet Atome
-  text(`Neutrons: ${atom.nbNeutrons}`, panelX + 10, infoY);
-  infoY += lineHeight;
-  text(`Electrons: ${atom.nbElectrons}`, panelX + 10, infoY);
-  infoY += lineHeight;
-  text(`Couches: ${atom.couches.join(', ')}`, panelX + 10, infoY);
-  infoY += lineHeight;
-  text(`Couches totales: ${atom.couches.length}`, panelX + 10, infoY);
+// display info
+function displayInfo(atom){
+  if(!atom || !atom.dataFromFile) return;
+  let px=width-220, py=50, w=200,h=180;
+  fill(30,200); stroke(255,100); strokeWeight(1); rect(px,py,w,h,10);
+  fill(255); noStroke(); textSize(16); textAlign(LEFT,TOP);
+  let y = py+10; let lh=24;
+  text(`Symbole: ${atom.dataFromFile.symbole}`, px+10,y); y+=lh;
+  text(`Nom: ${atom.dataFromFile.nomComplet}`, px+10,y); y+=lh;
+  text(`Protons: ${atom.dataFromFile.protons}`, px+10,y); y+=lh;
+  text(`Neutrons: ${atom.nbNeutrons}`, px+10,y); y+=lh;
+  text(`Electrons: ${atom.nbElectrons}`, px+10,y); y+=lh;
+  text(`Couches: ${atom.couches.join(',')}`, px+10,y); y+=lh;
+  text(`Couches totales: ${atom.couches.length}`, px+10,y);
 }
 
-
-function displayMenu() {
-  // Augmenter la taille du fond pour plus de visibilité
-  fill(255, 255); 
-  noStroke();
-  rect(20, 20, 520, 180, 15); // largeur et hauteur plus grandes, coins arrondis
-
-  fill(0);
-  textSize(18); // texte plus grand
-  textAlign(LEFT, TOP);
-  
-  let instructions = [
+// menu
+function displayMenu(){
+  fill(0,100); noStroke(); rect(20,20,520,180,15);
+  fill(255,204,0); textSize(18); textAlign(LEFT,TOP);
+  let instr=[
     "📜 Instructions :",
-    "- Appuyer sur 'd' pour activer/désactiver le debug",
-    "- Sélectionner un atome pour voir ses infos",
-    "- Cliquer sur l'icône pour créer un nouvel atome",
-    "- Sélectionner deux atomes et appuyer sur 'f' pour les fusionner",
-    "- Atteindre 118 électrons pour gagner ! 🎉"
+    "- Appuyer sur 'd' debug",
+    "- Selectionner atome",
+    "- Cliquer icone creer atome",
+    "- Deux atomes f pour fusion",
+    "- 118 electrons = win !"
   ];
-
-  let y = 30; // position de départ du texte
-  for (let line of instructions) {
-    text(line, 30, y); // laisser un peu de marge à gauche
-    y += 28; // espacement plus grand entre les lignes
-  }
+  let y=30;
+  for(let l of instr){ text(l,30,y); y+=28; }
 }
 
-
-
-
-
-
-
-
-function checkWinCondition() {
-  // Définir le nombre maximal d'électrons (Oganesson = 118)
-  const maxElectrons = 118;
-
-  for (let atom of atoms) {
-    if (atom.nbElectrons >= maxElectrons) {
-      fill(0, 255, 0, 200);
-      stroke(255);
-      strokeWeight(2);
-      textSize(48);
-      textAlign(CENTER, CENTER);
-      text("🎉 Tu as gagné ! 🎉", width / 2, height / 2);
-      noLoop(); // arrêter le jeu
+// win check
+function checkWinCondition(){
+  let maxE=118;
+  for(let a of atoms){
+    if(a.nbElectrons>=maxE){
+      fill(0,255,0,200); stroke(255); strokeWeight(2); textSize(48); textAlign(CENTER,CENTER);
+      text("🎉 Tu as gagne ! 🎉", width/2, height/2);
+      noLoop();
       break;
     }
   }

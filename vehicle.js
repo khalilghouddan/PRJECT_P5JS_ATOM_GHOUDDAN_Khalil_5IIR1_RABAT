@@ -11,44 +11,44 @@
 // Vehicle class
 
 class Vehicle {
-    static debug = false;
+  static debug = false;
 
   // Constructor initialize all values
-  constructor(x, y, ms, mf,atom) {
+  constructor(x, y, ms, mf, atom) {
     this.position = createVector(x, y);
     this.r = 70;
     this.maxspeed = ms;
     this.maxforce = mf;
     this.acceleration = createVector(0, 0);
     this.velocity = createVector(this.maxspeed, 0);
-this.couleur = this.couleurAleatoireNonNoire();
+    this.couleur = this.couleurAleatoireNonNoire();
 
     this.wanderWeight = 1;
     this.followPathWeight = 2;
     this.separateWeight = 3;
 
-     // pour comportement wander
-     this.distanceCercle = 250;
-     this.wanderRadius = 60;
-     this.wanderTheta = PI/2;
-     this.displaceRange = random(-0.3, 0.3);
- 
-     // trainée derrière les véhicules
-     this.pathMaxLength = 20;
-     this.path = [];
-         this.atom = atom; // atom est un objet de atomData
+    // pour comportement wander
+    this.distanceCercle = 250;
+    this.wanderRadius = 60;
+    this.wanderTheta = PI / 2;
+    this.displaceRange = random(-0.3, 0.3);
+
+    // trainée derrière les véhicules
+    this.pathMaxLength = 20;
+    this.path = [];
+    this.atom = atom; // atom est un objet de atomData
 
   }
 
- borders() {
+  borders() {
     if (this.position.x < -this.r) this.position.x = width + this.r;
     if (this.position.x > width + this.r) this.position.x = -this.r;
     if (this.position.y < -this.r) this.position.y = height + this.r;
     if (this.position.y > height + this.r) this.position.y = -this.r;
-}
+  }
 
 
-    dessinerNotationScientifique() {
+  dessinerNotationScientifique() {
     textAlign(CENTER, CENTER);
     textSize(32);
     fill(255);
@@ -60,13 +60,13 @@ this.couleur = this.couleurAleatoireNonNoire();
   couleurAleatoireNonNoire() {
     let r, g, b;
     do {
-        r = floor(random(256));
-        g = floor(random(256));
-        b = floor(random(256));
+      r = floor(random(256));
+      g = floor(random(256));
+      b = floor(random(256));
     } while (r < 30 && g < 30 && b < 30); // éviter noir ou presque noir
 
     return color(r, g, b);
-}
+  }
 
 
   // Implémente deux comportements : suivi de chemin complexe et séparation
@@ -293,7 +293,7 @@ this.couleur = this.couleurAleatoireNonNoire();
     let steer = wanderPoint.sub(this.position);
 
     steer.setMag(this.maxforce);
-    
+
 
     // On déplace le point vert sur le cerlcle (en radians)
     this.wanderTheta += random(-this.displaceRange, this.displaceRange);
@@ -317,7 +317,7 @@ this.couleur = this.couleurAleatoireNonNoire();
     this.path.push(this.position.copy());
 
     // si le tableau a plus de 50 éléments, on vire le plus ancien
-    if(this.path.length > this.pathMaxLength) {
+    if (this.path.length > this.pathMaxLength) {
       this.path.shift();
     }
   }
@@ -338,23 +338,23 @@ this.couleur = this.couleurAleatoireNonNoire();
   }
 
   render() {
-      // Simple boid is just a circle
-      fill(this.couleur);
-      stroke(0);
-      push();
-      translate(this.position.x, this.position.y);
-      ellipse(0, 0, this.r, this.r);
+    // Simple boid is just a circle
+    fill(this.couleur);
+    stroke(0);
+    push();
+    translate(this.position.x, this.position.y);
+    ellipse(0, 0, this.r, this.r);
 
-      
+
     // Texte scientifique
     textAlign(CENTER, CENTER);
     textSize(24);
     fill(0);
     noStroke();
-    if(this.atom) {
-        text(this.atom.symbole + this.atom.protons, 0, 0);
+    if (this.atom) {
+      text(this.atom.symbole + this.atom.protons, 0, 0);
     }
-      pop();
+    pop();
   }
 
   edges() {
@@ -363,7 +363,7 @@ this.couleur = this.couleurAleatoireNonNoire();
     } else if (this.position.x < -this.r) {
       this.position.x = width + this.r;
     }
-   
+
   }
 }
 

@@ -1,6 +1,6 @@
 
 class Path {
-    static debug = false;  // add this line at the top of the class
+  static debug = false;  // add this line at the top of the class
 
   constructor() {
     // Rayon arbitraire de 20 (c'est la demi-largeur de la route)
@@ -23,7 +23,6 @@ class Path {
     // bords arrondis dans les irages
     strokeJoin(ROUND);
 
-    // couleur de la route = gris
     stroke(255, 204, 0);    // jaune
     // On dessine le chemin deux fois plus large que la droite qui relie deux points
     strokeWeight(this.radius * 2);
