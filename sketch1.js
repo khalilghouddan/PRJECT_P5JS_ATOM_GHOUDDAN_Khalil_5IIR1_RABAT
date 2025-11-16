@@ -247,27 +247,31 @@ function displayInfo(atom) {
 
 
 function displayMenu() {
-  fill(255, 255);
+  // Augmenter la taille du fond pour plus de visibilité
+  fill(255, 255); 
   noStroke();
-  rect(20, 20, 360, 120, 10); // fond semi-transparent
+  rect(20, 20, 520, 180, 15); // largeur et hauteur plus grandes, coins arrondis
 
   fill(0);
-  textSize(14);
+  textSize(18); // texte plus grand
   textAlign(LEFT, TOP);
+  
   let instructions = [
-    "Instructions :",
+    "📜 Instructions :",
     "- Appuyer sur 'd' pour activer/désactiver le debug",
     "- Sélectionner un atome pour voir ses infos",
     "- Cliquer sur l'icône pour créer un nouvel atome",
-    "- Sélectionner deux atomes et appuyer sur 'f' pour les fusionner"
+    "- Sélectionner deux atomes et appuyer sur 'f' pour les fusionner",
+    "- Atteindre 118 électrons pour gagner ! 🎉"
   ];
 
-  let y = 30;
+  let y = 30; // position de départ du texte
   for (let line of instructions) {
-    text(line, 30, y);
-    y += 30;
+    text(line, 30, y); // laisser un peu de marge à gauche
+    y += 28; // espacement plus grand entre les lignes
   }
 }
+
 
 
 
