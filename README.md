@@ -1,7 +1,7 @@
 # Simulation des Réactions Atomiques
 
-**Nom :** [Ton Nom]  
-**Prénom :** [Ton Prénom]  
+**Nom :** GHOUDDAN
+**Prénom :** Khalil
 **Classe :** 5IIR1  
 **École :** EMSI Rabat  
 
