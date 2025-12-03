@@ -2,7 +2,7 @@
 
 ## 🎥 Vidéo de démonstration
 
-https://drive.google.com/file/d/1ddDG9NEoMuuCMgTKVCyE6jXgMHHFgkhE/view?t=1
+[![Demo Video](https://drive.google.com/thumbnail?id=1ddDG9NEoMuuCMgTKVCyE6jXgMHHFgkhE)](https://drive.google.com/file/d/1ddDG9NEoMuuCMgTKVCyE6jXgMHHFgkhE/view?usp=sharing)
 
 **Nom :** GHOUDDAN
 **Prénom :** Khalil
