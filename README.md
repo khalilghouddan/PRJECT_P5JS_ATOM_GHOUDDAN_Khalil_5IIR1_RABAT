@@ -2,8 +2,7 @@
 
 ## 🎥 Vidéo de démonstration
 
-https://github.com/khalilghouddan/PRJECT_P5JS_ATOM_GHOUDDAN_Khalil_5IIR1_RABAT/blob/main/Recording_2025-11-16_174342.mp4
----
+[![Voir la vidéo](thumbnail.png)](https://github.com/khalilghouddan/PRJECT_P5JS_ATOM_GHOUDDAN_Khalil_5IIR1_RABAT/blob/main/Screen%20Recording%202025-11-16%20174337.mp4)
 
 **Nom :** GHOUDDAN
 **Prénom :** Khalil
