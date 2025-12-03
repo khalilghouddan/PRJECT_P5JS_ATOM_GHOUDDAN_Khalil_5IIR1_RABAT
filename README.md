@@ -5,16 +5,11 @@
 Ajoutez la vidéo dans votre dépôt puis utilisez ce format :
 
 ```markdown
-[httpshttps://github.com/khalilghouddan/PRJECT_P5JS_ATOM_GHOUDDAN_Khalil_5IIR1_RABAT/main/Recording%202025-11-16%20174342.mp4
+https://github.com/khalilghouddan/PRJECT_P5JS_ATOM_GHOUDDAN_Khalil_5IIR1_RABAT/blob/main/Recording%202025-11-16%20174342.mp4
 ```
 
-Ou si GitHub la prévisualise :
 
-```markdown
-![Simulation Video](Recording%202025-11-16%20174342.mp4)
-```
 
-*(Remplacez le chemin après upload dans votre repo)*
 
 ---
 
