@@ -2,15 +2,13 @@
 
 ## 🎥 Vidéo de démonstration
 
-[▶️ Voir la vidéo de démonstration](Recording_202025-11-16_20174342.mp4)
-
+https://github.com/khalilghouddan/PRJECT_P5JS_ATOM_GHOUDDAN_Khalil_5IIR1_RABAT/blob/main/Recording_2025-11-16_174342.mp4
 ---
 
 **Nom :** GHOUDDAN
 **Prénom :** Khalil
 
 
-https://github.com/user-attachments/assets/a7ec76d4-0557-4021-893c-84877f7bc8e7
 
 
 **Classe :** 5IIR1
