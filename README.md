@@ -2,9 +2,7 @@
 
 ## 🎥 Vidéo de démonstration
 
-<video controls width="600">
-  <source src="Recording_2025-11-16_174342.mp4" type="video/mp4">
-</video>
+[▶️ Voir la vidéo de démonstration](Recording_202025-11-16_20174342.mp4)
 
 ---
 
