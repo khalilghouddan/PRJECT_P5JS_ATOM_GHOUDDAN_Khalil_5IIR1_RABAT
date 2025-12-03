@@ -2,11 +2,9 @@
 
 ## 🎥 Vidéo de démonstration
 
-
-[![Voir la vidéo](thumbnail.png)](https://github.com/khalilghouddan/PRJECT_P5JS_ATOM_GHOUDDAN_Khalil_5IIR1_RABAT/Recording%202025-11-16%20174342.mp4)
-
-
-
+<video controls width="600">
+  <source src="Recording 2025-11-16 174342.mp4" type="video/mp4">
+</video>
 
 ---
 
