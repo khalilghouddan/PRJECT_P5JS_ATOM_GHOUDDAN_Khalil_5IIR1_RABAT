@@ -2,7 +2,7 @@
 
 ## 🎥 Vidéo de démonstration
 
-[![Demo Video](https://drive.google.com/thumbnail?id=1ddDG9NEoMuuCMgTKVCyE6jXgMHHFgkhE)](https://drive.google.com/file/d/1ddDG9NEoMuuCMgTKVCyE6jXgMHHFgkhE/view?usp=sharing)
+[![Demo Video](https://github.com/UniCA-EMSI-RABAT-IA2/kotlin-td3-ghouddan-khalil/blob/main/Screenshot%202025-12-14%20174528.png)](https://drive.google.com/file/d/1ddDG9NEoMuuCMgTKVCyE6jXgMHHFgkhE/view?usp=sharing)
 
 **Nom :** GHOUDDAN
 **Prénom :** Khalil
