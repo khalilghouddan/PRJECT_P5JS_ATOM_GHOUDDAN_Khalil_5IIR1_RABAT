@@ -2,8 +2,8 @@
 
 ## 🎥 Vidéo de démonstration
 
-<a href="https://drive.google.com/file/d/1_3oE9GyK3rIoMHGHD0MkxqHVQoAGHqvT/view?usp=sharing">
-  <img src="https://github.com/UniCA-EMSI-RABAT-IA2/kotlin-td3-ghouddan-khalil/blob/main/Screenshot%202025-12-14%20174528.png"
+<a href="https://drive.google.com/file/d/1ddDG9NEoMuuCMgTKVCyE6jXgMHHFgkhE/view?usp=sharing">
+  <img src="https://lh3.googleusercontent.com/d/1ddDG9NEoMuuCMgTKVCyE6jXgMHHFgkhE=s220?authuser=0"
        alt="Demo Video"
        width="300">
 </a>
