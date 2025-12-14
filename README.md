@@ -2,7 +2,11 @@
 
 ## 🎥 Vidéo de démonstration
 
-[![Demo Video](https://github.com/UniCA-EMSI-RABAT-IA2/kotlin-td3-ghouddan-khalil/blob/main/Screenshot%202025-12-14%20174528.png)](https://drive.google.com/file/d/1_3oE9GyK3rIoMHGHD0MkxqHVQoAGHqvT/view?usp=sharing)
+<a href="https://drive.google.com/file/d/1_3oE9GyK3rIoMHGHD0MkxqHVQoAGHqvT/view?usp=sharing">
+  <img src="https://github.com/UniCA-EMSI-RABAT-IA2/kotlin-td3-ghouddan-khalil/blob/main/Screenshot%202025-12-14%20174528.png"
+       alt="Demo Video"
+       width="300">
+</a>
 
 **Nom :** GHOUDDAN
 **Prénom :** Khalil
